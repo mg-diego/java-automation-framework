@@ -11,6 +11,7 @@ import io.cucumber.plugin.event.TestCase;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.nio.file.Paths;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -47,8 +48,10 @@ public class Hooks {
 
     @AfterStep
     public void afterStep(Scenario scenario) throws IOException, NoSuchFieldException, IllegalAccessException {
+
         String screenshotPath = generateScreenshotPath(scenario);
         WebDriverManager.takeScreenshot(screenshotPath);
+        scenario.attach(screenshotPath,"image/png", Paths.get(screenshotPath).getFileName().toString());
         _stepCounter++;
     }
 
