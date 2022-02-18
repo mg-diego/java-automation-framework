@@ -1,20 +1,20 @@
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
 
 public class BaseTest {
 
     private WebDriver driver;
 
-    @BeforeSuite
-    public void beforeSuite() {
+    @BeforeEach
+    public void beforeTest() {
         System.setProperty("webdriver.chrome.driver","C:\\temp\\chromedriver.exe");
         driver = new ChromeDriver();
     }
 
-    @AfterSuite
-    public void afterSuite() {
+    @AfterEach
+    public void afterTest() {
         if(null != driver) {
             driver.close();
             driver.quit();
