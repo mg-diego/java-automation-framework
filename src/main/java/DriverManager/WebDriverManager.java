@@ -1,5 +1,6 @@
 package DriverManager;
 
+import Helpers.ConfigFileReader;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -19,11 +20,11 @@ public final class WebDriverManager {
     }
 
     public static void createDriverSession(String driverType){
-        System.setProperty("webdriver.chrome.driver","C:\\temp\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", ConfigFileReader.getDriverPath());
 
         switch (driverType.toLowerCase(Locale.ROOT)) {
             case "chrome" -> driver = new ChromeDriver();
-            case "firefox", "internetexplorer" -> throw new UnsupportedOperationException();
+            default -> throw new UnsupportedOperationException();
         }
 
         driver.manage().window().maximize();

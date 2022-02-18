@@ -1,6 +1,7 @@
 package StepDefinitions;
 
 import DriverManager.WebDriverManager;
+import Helpers.ConfigFileReader;
 import io.cucumber.core.backend.TestCaseState;
 import io.cucumber.java.*;
 import io.cucumber.java.Scenario;
@@ -22,6 +23,11 @@ public class Hooks {
 
     private String _scenarioEvidencesPath;
     private int _stepCounter;
+
+    @BeforeAll
+    public static void beforeTestRun() {
+        ConfigFileReader.readConfiguration();
+    }
 
     @Before
     public void beforeScenario(Scenario scenario) {
@@ -67,7 +73,8 @@ public class Hooks {
     private void createTestEvidencesFolder(String scenarioName) {
         String date = DateTimeFormatter.ofPattern("yyyy-MM-dd hh-mm-ss").withZone(ZoneId.of("UTC"))
                 .format(Instant.now());
-        _scenarioEvidencesPath = String.format("C:\\tmp\\%s - %s", scenarioName, date);
+        Helpers.ConfigFileReader.getDriverPath();
+        _scenarioEvidencesPath = String.format("%s\\%s - %s", ConfigFileReader.getEvidencesFolder(), scenarioName, date);
         new File(_scenarioEvidencesPath).mkdirs();
     }
 }
