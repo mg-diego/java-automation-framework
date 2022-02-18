@@ -6,8 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="java-automation-framework" />
-        <module name="Maven" />
+        <module name="automationFramework" />
       </profile>
     </annotationProcessing>
   </component>
