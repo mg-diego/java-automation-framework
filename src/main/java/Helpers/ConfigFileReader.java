@@ -1,42 +1,53 @@
 package Helpers;
 
-import java.io.BufferedReader;
+import Models.Configuration;
+import Models.ConfigurationList;
+import Models.DriverType;
+
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.Properties;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Locale;
+import java.util.Objects;
 
 public final class ConfigFileReader {
 
-    private static Properties properties;
-    private static String propertyFilePath= "src//configurations//Configuration.properties";
+    private static ConfigurationList configurationList;
+    public static String webDriverType;
+    private static String propertyFilePath= "src//configurations//Configuration.json";
+
+    public static ConfigurationList getConfiguration() { return configurationList; }
 
     public static void readConfiguration() {
-        BufferedReader reader;
+
         try {
-            reader = new BufferedReader(new FileReader(propertyFilePath));
-            properties = new Properties();
-            try {
-                properties.load(reader);
-                reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            //Read JSON file
+            String text = new String(Files.readAllBytes(Paths.get(propertyFilePath)), StandardCharsets.UTF_8);
+            configurationList = Converter.fromJsonString(text);
+            webDriverType = configurationList.configurations.stream()
+                    .filter(p -> Objects.equals(p.tag.toLowerCase(Locale.ROOT), DriverType.WEB.toString().toLowerCase(Locale.ROOT)))
+                    .findFirst().get().type;
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            throw new RuntimeException("Configuration.properties not found at " + propertyFilePath);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    public static String getDriverPath() {
-        String driverPath = properties.getProperty("driverPath");
-        if(driverPath!= null) return driverPath;
-        else throw new RuntimeException("driverPath not specified in the Configuration.properties file.");
+    public static String getWebDriverPath() {
+        Configuration webDriverConfiguration = configurationList.configurations.stream()
+                .filter(p -> Objects.equals(p.type, webDriverType)).findFirst().get();
+
+        String driverPath = webDriverConfiguration.capabilities.stream().filter(x -> Objects.equals(x.driverType, webDriverType)).findFirst().get().driverPath;
+        if(driverPath != null) return driverPath;
+        else throw new RuntimeException(String.format("driverPath not specified for driverType '%s' in the Configuration.json file.", webDriverType));
     }
 
     public static String getEvidencesFolder() {
-        String evidencesFolder = properties.getProperty("evidencesFolder");
-        if(evidencesFolder!= null) return evidencesFolder;
-        else throw new RuntimeException("evidencesFolder not specified in the Configuration.properties file.");
+        if(configurationList.evidencesFolder != null) return configurationList.evidencesFolder;
+        else throw new RuntimeException("evidencesFolder not specified in the Configuration.json file.");
     }
 }

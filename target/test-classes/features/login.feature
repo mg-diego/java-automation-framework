@@ -1,4 +1,4 @@
-@Chrome
+@Web
 Feature: Login
 
   Scenario: Login

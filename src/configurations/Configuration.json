@@ -1,0 +1,37 @@
+{
+  "configurations" : [
+    {
+      "tag": "Web",
+      "type": "Chrome",
+      "baseUrl": "https://localhost:8080/",
+      "capabilities" : [
+        {
+          "driverType": "Chrome",
+          "driverPath": "C:\\temp\\chromedriver.exe"
+        },
+        {
+          "driverType": "Firefox",
+          "driverPath": "C:\\temp\\geckodriver.exe"
+        },
+        {
+          "driverType": "Edge",
+          "driverPath": "C:\\temp\\msedgedriver.exe"
+        }
+      ]
+    },
+    {
+      "tag": "API",
+      "capabilities": [
+        {
+          "apiType": "Microservice_one",
+          "baseUrl": "https://localhost:5084/api/"
+        },
+        {
+          "apiType": "Microservice_two",
+          "baseUrl": "https://localhost:8054/api/"
+        }
+      ]
+    }
+  ],
+  "evidencesFolder": "C:\\temp\\qiagen"
+}
