@@ -4,18 +4,20 @@ import DriverManager.WebDriverManager;
 import PageObjectModel.HomePage;
 import PageObjectModel.InventoryPage;
 import PageObjectModel.MenuPage;
+import TestContext.TestContext;
 import io.cucumber.java.en.*;
 
-public class SwagLabsSteps {
+public class SwagLabsSteps extends WebStepBase {
 
     private HomePage homePage;
     private MenuPage menuPage;
     private InventoryPage inventoryPage;
 
-    public SwagLabsSteps(){
-        homePage = new HomePage(WebDriverManager.getDriver());
-        menuPage = new MenuPage(WebDriverManager.getDriver());
-        inventoryPage = new InventoryPage(WebDriverManager.getDriver());
+    public SwagLabsSteps(TestContext testContext) {
+        super(testContext);
+        homePage = new HomePage(this.testContext.webDriverManager.getDriver());
+        menuPage = new MenuPage(this.testContext.webDriverManager.getDriver());
+        inventoryPage = new InventoryPage(this.testContext.webDriverManager.getDriver());
     }
 
     @Given("the user enters the username {string}")

@@ -1,23 +1,17 @@
 {
+  "postgresqlConnectionString": "jdbc:postgresql://localhost:5432/database",
+  "postgresqlUser": "guest",
+  "postgresqlPassword": "guest",
+  "mongoDbConnectionString": "mongodb://guest:guest@localhost:27017/",
   "configurations" : [
     {
       "tag": "Web",
       "type": "Chrome",
-      "baseUrl": "https://localhost:8080/",
-      "capabilities" : [
-        {
-          "driverType": "Chrome",
-          "driverPath": "C:\\temp\\chromedriver.exe"
-        },
-        {
-          "driverType": "Firefox",
-          "driverPath": "C:\\temp\\geckodriver.exe"
-        },
-        {
-          "driverType": "Edge",
-          "driverPath": "C:\\temp\\msedgedriver.exe"
-        }
-      ]
+      "webDriverType": "selenoid",
+      "baseUrl": "https://www.saucedemo.com/v1/",
+      "selenoidUri": "http://localhost:4444/wd/hub",
+      "deleteEvidencesForPassedTests": true,
+      "capabilities" : []
     },
     {
       "tag": "API",
@@ -33,5 +27,6 @@
       ]
     }
   ],
-  "evidencesFolder": "C:\\temp\\qiagen"
+  "evidencesFolder": "C:\\temp\\evidences",
+  "downloadDataPath": "C:\\temp\\downloads"
 }

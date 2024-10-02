@@ -1,6 +1,6 @@
 package Models;
 
-import io.cucumber.messages.internal.com.fasterxml.jackson.annotation.JsonProperty;
+import io.cucumber.core.internal.com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Capability {
     @JsonProperty("driverType")

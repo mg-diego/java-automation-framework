@@ -1,9 +1,10 @@
 package PageObjectModel;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class HomePage extends PageBase {
 
@@ -36,6 +37,6 @@ public class HomePage extends PageBase {
     }
 
     public void checkUserIsAtHomePage() {
-        Assert.assertEquals("Different URL", driver.getCurrentUrl(), LOGIN_URL);
+        assertThat(driver.getCurrentUrl()).isEqualTo(LOGIN_URL).withFailMessage("Expected same URL.");
     }
 }

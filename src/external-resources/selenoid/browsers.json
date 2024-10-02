@@ -1,0 +1,77 @@
+{
+    "chrome": {
+        "default": "125.0",
+        "versions": {
+            "125.0": {
+                "image": "selenoid/chrome:125.0",
+                "port": "4444",
+				"volumes": ["/c/temp/downloads:/home/selenium/Downloads"],
+                "path": "/",
+                "tmpfs": {
+                    "/tmp": "size=256m"
+                },
+              "sessionTimeout": "11m"
+            },
+            "94.0": {
+                "image": "selenoid/chrome:94.0",
+                "port": "4444",
+				"volumes": ["/c/temp/downloads:/home/selenium/Downloads"],
+                "path": "/",
+                "tmpfs": {
+                    "/tmp": "size=256m"
+                },
+              "sessionTimeout": "11m"
+            }
+        }
+    },
+    "firefox": {
+        "default": "125.0",
+        "versions": {
+            "125.0": {
+                "image": "selenoid/firefox:125.0",
+                "port": "4444",
+				"volumes": ["/c/temp/downloads:/home/selenium/Downloads"],
+                "path": "/wd/hub",
+                "tmpfs": {
+                    "/tmp": "size=256m"
+                },
+              "sessionTimeout": "11m"
+            },
+            "92.0": {
+                "image": "selenoid/firefox:92.0",
+                "port": "4444",
+				"volumes": ["/c/temp/downloads:/home/selenium/Downloads"],
+                "path": "/wd/hub",
+                "tmpfs": {
+                    "/tmp": "size=256m"
+                },
+              "sessionTimeout": "11m"
+            }
+        }
+    },
+	"MicrosoftEdge": {
+        "default": "124.0",
+        "versions": {
+			"124.0": {
+				"image": "browsers/edge:124.0",
+				"port": "4444",
+				"volumes": ["/c/temp/downloads:/home/selenium/Downloads"],
+				"path": "/",
+              "tmpfs": {
+                "/tmp": "size=256m"
+              },
+              "sessionTimeout": "11m"
+			},
+			"94.0": {
+				"image": "browsers/edge:94.0",
+				"port": "4444",
+				"volumes": ["/c/temp/downloads:/home/selenium/Downloads"],
+				"path": "/",
+              "tmpfs": {
+                "/tmp": "size=256m"
+              },
+              "sessionTimeout": "11m"
+			}
+        }
+	}
+}

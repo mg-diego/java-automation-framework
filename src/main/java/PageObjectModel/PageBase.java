@@ -6,6 +6,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public class PageBase {
 
     private static final int TIMEOUT = 5;
@@ -16,7 +18,7 @@ public class PageBase {
     public PageBase(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        wait = new WebDriverWait(driver, TIMEOUT);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT));
     }
 
     protected void clickElement(WebElement element){

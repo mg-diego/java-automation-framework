@@ -1,13 +1,13 @@
 @Web
 Feature: Login
 
-  Scenario: Login
+  Scenario: TEST-01 - [CHROME - vMAXIMUM_VERSION - 1920x1080] Login
     Given the user enters the username 'standard_user'
     And the user enters password 'secret_sauce'
     When the user clicks on submit button
     Then the user can login
 
-  Scenario: Logout
+  Scenario: TEST-02 - [FIREFOX - vMAXIMUM_VERSION - 1920x1080] Logout
     Given the user enters the username 'standard_user'
     And the user enters password 'secret_sauce'
     When the user clicks on submit button

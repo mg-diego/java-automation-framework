@@ -1,15 +1,19 @@
 package StepDefinitions;
 
-import org.junit.platform.suite.api.ConfigurationParameter;
-import org.junit.platform.suite.api.IncludeEngines;
-import org.junit.platform.suite.api.SelectClasspathResource;
-import org.junit.platform.suite.api.Suite;
+import io.cucumber.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.CucumberOptions;
+import org.testng.annotations.DataProvider;
 
-import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
+@CucumberOptions(
+        plugin = {"pretty", "message:target/cucumber-report/cucumber-messages.ndjson" },
+        features = "src\\test\\resources\\features",
+        glue = "StepDefinitions"
+)
+public class RunCucumberTest extends AbstractTestNGCucumberTests {
 
-@Suite
-@IncludeEngines("cucumber")
-@SelectClasspathResource("features")
-@ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
-public class RunCucumberTest {
+    @Override
+    @DataProvider(parallel = true)
+    public Object[][] scenarios() {
+        return super.scenarios();
+    }
 }

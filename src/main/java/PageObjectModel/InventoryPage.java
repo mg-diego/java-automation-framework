@@ -1,7 +1,8 @@
 package PageObjectModel;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class InventoryPage extends PageBase {
 
@@ -12,6 +13,6 @@ public class InventoryPage extends PageBase {
     }
 
     public void checkUserIsAtInventory() {
-        Assert.assertEquals("Different URL", driver.getCurrentUrl(), INVENTORY_URL);
+        assertThat(driver.getCurrentUrl()).isEqualTo(INVENTORY_URL).withFailMessage("Expected same URL.");
     }
 }

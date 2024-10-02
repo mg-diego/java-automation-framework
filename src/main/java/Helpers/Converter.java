@@ -1,10 +1,15 @@
 package Helpers;
 
 import Models.ConfigurationList;
-import io.cucumber.messages.internal.com.fasterxml.jackson.core.JsonParser;
-import io.cucumber.messages.internal.com.fasterxml.jackson.core.JsonProcessingException;
-import io.cucumber.messages.internal.com.fasterxml.jackson.databind.*;
-import io.cucumber.messages.internal.com.fasterxml.jackson.databind.module.SimpleModule;
+import io.cucumber.core.internal.com.fasterxml.jackson.core.JsonParser;
+import io.cucumber.core.internal.com.fasterxml.jackson.core.JsonProcessingException;
+import io.cucumber.core.internal.com.fasterxml.jackson.databind.DeserializationContext;
+import io.cucumber.core.internal.com.fasterxml.jackson.databind.JsonDeserializer;
+import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
+import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectReader;
+import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectWriter;
+import io.cucumber.core.internal.com.fasterxml.jackson.databind.SerializationFeature;
+import io.cucumber.core.internal.com.fasterxml.jackson.databind.module.SimpleModule;
 
 import java.io.IOException;
 import java.time.OffsetDateTime;
