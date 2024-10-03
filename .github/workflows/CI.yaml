@@ -11,23 +11,42 @@ jobs:
     name: Execute Tests
     runs-on: windows-latest
     steps:
-        - name: Checkout code
-          uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-        - name: Set up JDK 17
-          uses: actions/setup-java@v2
-          with:
-            java-version: '17'
-            distribution: 'temurin'
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
 
-        - name: Build solution
-          shell: cmd
-          run: mvn clean package -DskipTests -Dstyle.color=always
+      - name: Build solution
+        shell: cmd
+        run: mvn clean package -DskipTests -Dstyle.color=always
 
-        - name: Run WEB tests
-          shell: cmd
-          run: mvn test -DsuiteXmlFile=TestNG.xml -Dstyle.color=always -Dcucumber.filter.tags="@WEB"
+  api-tests:
+    name: API
+    runs-on: windows-latest
+    needs:
+      - build
+    steps:
+      - name: Run API tests
+        shell: cmd
+        run: mvn test -DsuiteXmlFile=TestNG.xml -Dstyle.color=always -Dcucumber.filter.tags="@API"
 
-        - name: Run API tests
-          shell: cmd
-          run: mvn test -DsuiteXmlFile=TestNG.xml -Dstyle.color=always -Dcucumber.filter.tags="@API"
+  web-tests:
+    name: WEB
+    runs-on: windows-latest
+    needs:
+      - build
+    steps:
+      - name: Run WEB tests
+        shell: cmd
+        run: mvn test -DsuiteXmlFile=TestNG.xml -Dstyle.color=always -Dcucumber.filter.tags="@WEB"
+
+      - name: Archive test evidences
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-test-evidences
+          path: 'C:\temp\selenoid\video'
