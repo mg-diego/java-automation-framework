@@ -1,5 +1,5 @@
 Write-Host "Stopping selenoid and selenoid-ui containers" -ForegroundColor DarkGreen
-docker-compose down
+docker compose down
 
 Write-Host "Download Selenoid video recorder" -ForegroundColor DarkGreen
 docker pull selenoid/video-recorder:latest-release
@@ -13,4 +13,4 @@ foreach($browser in $browsers.PsObject.Properties.Value) {
 }
 
 Write-Host "Starting selenoid and selenoid-ui containers" -ForegroundColor DarkGreen
-docker-compose up -d
+docker compose up -d
