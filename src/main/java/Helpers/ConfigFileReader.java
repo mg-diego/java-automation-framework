@@ -1,5 +1,6 @@
 package Helpers;
 
+import Enums.ApiType;
 import Enums.BrowserType;
 import Models.Configuration;
 import Models.ConfigurationList;
@@ -98,6 +99,17 @@ public final class ConfigFileReader {
         Boolean selenoidUri = getWebDriverConfiguration().deleteEvidencesForPassedTests;
         return Optional.of(selenoidUri).orElseThrow(
                 () -> new NullPointerException("deleteEvidencesForPassedTests not specified in the Configuration.json file."));
+    }
+
+    public static String getApiBaseUrl(ApiType apiType) {
+        Configuration apiConfiguration = configurationList.configurations.stream()
+                .filter(p -> Objects.equals(p.tag.toLowerCase(Locale.ROOT), DriverType.API.toString().toLowerCase(Locale.ROOT)))
+                .findFirst().get();
+        String baseUrl = apiConfiguration.capabilities.stream()
+                .filter(x -> Objects.equals(x.apiType.toUpperCase(Locale.ROOT), apiType.toString().toUpperCase(Locale.ROOT)))
+                .findFirst().get().baseURL;
+        return Optional.ofNullable(baseUrl).orElseThrow(
+                () -> new NullPointerException("baseUrl not specified in the Configuration.json file for API."));
     }
 
     private static Configuration getWebDriverConfiguration() {

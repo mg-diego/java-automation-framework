@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class HomePage extends PageBase {
@@ -18,6 +20,9 @@ public class HomePage extends PageBase {
 
     @FindBy(name="login-button")
     WebElement loginButton;
+
+    @FindBy(xpath="//*[@data-test='error']")
+    List<WebElement> errorMessage;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -38,5 +43,9 @@ public class HomePage extends PageBase {
 
     public void checkUserIsAtHomePage() {
         assertThat(driver.getCurrentUrl()).isEqualTo(LOGIN_URL).withFailMessage("Expected same URL.");
+    }
+
+    public void checkErrorMessageAppears() {
+        checkElementExists(errorMessage);
     }
 }

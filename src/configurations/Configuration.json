@@ -17,12 +17,8 @@
       "tag": "API",
       "capabilities": [
         {
-          "apiType": "Microservice_one",
-          "baseUrl": "https://localhost:5084/api/"
-        },
-        {
-          "apiType": "Microservice_two",
-          "baseUrl": "https://localhost:8054/api/"
+          "apiType": "Genderize",
+          "baseUrl": "https://api.genderize.io/"
         }
       ]
     }

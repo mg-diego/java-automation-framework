@@ -10,6 +10,7 @@ import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectReader;
 import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectWriter;
 import io.cucumber.core.internal.com.fasterxml.jackson.databind.SerializationFeature;
 import io.cucumber.core.internal.com.fasterxml.jackson.databind.module.SimpleModule;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.time.OffsetDateTime;
@@ -35,6 +36,10 @@ public class Converter {
 
     public static OffsetDateTime parseDateTimeString(String str) {
         return ZonedDateTime.from(Converter.DATE_TIME_FORMATTER.parse(str)).toOffsetDateTime();
+    }
+
+    public static JSONObject fromStringToJson(String jsonString) {
+        return new JSONObject(jsonString);
     }
 
     private static final DateTimeFormatter TIME_FORMATTER = new DateTimeFormatterBuilder()

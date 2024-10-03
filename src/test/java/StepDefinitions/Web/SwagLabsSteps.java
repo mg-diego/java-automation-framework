@@ -1,6 +1,5 @@
-package StepDefinitions;
+package StepDefinitions.Web;
 
-import DriverManager.WebDriverManager;
 import PageObjectModel.HomePage;
 import PageObjectModel.InventoryPage;
 import PageObjectModel.MenuPage;
@@ -53,5 +52,10 @@ public class SwagLabsSteps extends WebStepBase {
     @Then("the user is at homepage")
     public void theUserIsAtHomepage() {
         homePage.checkUserIsAtHomePage();
+    }
+
+    @Then("the login error message appears")
+    public void theLoginErrorMessageAppears() {
+        homePage.checkErrorMessageAppears();
     }
 }

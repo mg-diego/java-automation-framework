@@ -1,4 +1,4 @@
-package StepDefinitions;
+package StepDefinitions.Web;
 
 import TestContext.TestContext;
 

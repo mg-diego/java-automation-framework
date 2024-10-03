@@ -110,10 +110,12 @@ public class Hooks {
 
     @AfterStep
     public void afterStep(Scenario scenario) throws IOException, NoSuchFieldException, IllegalAccessException {
-        String screenshotPath = generateScreenshotPath(scenario);
-        WebDriverManager.takeScreenshot(screenshotPath);
-        scenario.attach(screenshotPath,"image/png", Paths.get(screenshotPath).getFileName().toString());
-        _stepCounter++;
+        if (scenarioType == DriverType.WEB) {
+            String screenshotPath = generateScreenshotPath(scenario);
+            WebDriverManager.takeScreenshot(screenshotPath);
+            scenario.attach(screenshotPath,"image/png", Paths.get(screenshotPath).getFileName().toString());
+            _stepCounter++;
+        }
     }
 
     private String generateScreenshotPath(Scenario scenario) throws NoSuchFieldException, IllegalAccessException {

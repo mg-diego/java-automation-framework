@@ -29,10 +29,6 @@ public class TestContext {
     private String userBearerToken = "";
     @Getter
     private String userRefreshToken = "default";
-    @Getter
-    private String qiaidentityBearerToken = "";
-    @Getter
-    private String qiaidentityRefreshToken = "default";
     public String id = UUID.randomUUID().toString();
     @Getter
     private Language language = Language.ENGLISH;
