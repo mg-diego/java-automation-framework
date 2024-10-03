@@ -8,8 +8,8 @@ on:
   
 jobs:
   build:
-    name: Create Testing Artifacts
-    runs-on: ubuntu-latest
+    name: Execute Tests
+    runs-on: windows-latest
     steps:
         - uses: actions/checkout@v2
         - name: Set up JDK 17
@@ -17,7 +17,12 @@ jobs:
           with:
             java-version: '17'
             distribution: 'temurin'
-        - name: Build with Maven
-          run: mvn test -e
-        - name: Execute tests with Maven
-          run: mvn test
+        - name: Build solution
+          run: mvn clean package -DskipTests -Dstyle.color=always
+        - name: Run Selenoid
+          shell: pwsh
+          run: .\src\external-resources\selenoid\start-selenoid-docker.ps1
+        - name: Run WEB tests
+          run: mvn test -DsuiteXmlFile=TestNG.xml -Dstyle.color=always -Dcucumber.filter.tags="@WEB"
+        - name: Run API tests
+          run: mvn test -DsuiteXmlFile=TestNG.xml -Dstyle.color=always -Dcucumber.filter.tags="@API"

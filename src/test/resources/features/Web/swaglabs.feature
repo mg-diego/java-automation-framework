@@ -1,4 +1,4 @@
-@Web @Parallel
+@WEB @Parallel
 Feature: Login
 
   Cucumber web feature example using the SwagLabs page
