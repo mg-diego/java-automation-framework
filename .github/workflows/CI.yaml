@@ -68,9 +68,16 @@ jobs:
         shell: cmd
         run: mvn test -DsuiteXmlFile=TestNG.xml -Dstyle.color=always -Dcucumber.filter.tags="@WEB"
 
-      - name: Archive test evidences
+      - name: Archive video test evidences
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: web-test-evidences
+          name: web-video-evidences
           path: 'C:\temp\selenoid\video'
+
+      - name: Archive image test evidences
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-image-evidences
+          path: 'C:\temp\evidences'

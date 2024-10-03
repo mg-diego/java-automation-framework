@@ -10,7 +10,7 @@
       "webDriverType": "local",
       "baseUrl": "https://www.saucedemo.com/v1/",
       "selenoidUri": "http://localhost:4444/wd/hub",
-      "deleteEvidencesForPassedTests": true,
+      "deleteEvidencesForPassedTests": false,
       "capabilities" : []
     },
     {
