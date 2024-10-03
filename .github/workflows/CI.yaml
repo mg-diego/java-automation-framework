@@ -25,9 +25,9 @@ jobs:
         run: mvn clean install -DskipTests -Dstyle.color=always
 
       - name: Archive build artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
-          name: build-artifacts
+          name: build-artifact
           path: target/
 
   api-tests:
@@ -37,11 +37,11 @@ jobs:
       - build
     steps:
       - name: Download build artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
-          name: build-artifacts
+          name: build-artifact
           path: target/
-          
+
       - name: Run API tests
         shell: cmd
         run: mvn test -DsuiteXmlFile=TestNG.xml -Dstyle.color=always -Dcucumber.filter.tags="@API"
@@ -53,9 +53,9 @@ jobs:
       - build
     steps:
       - name: Download build artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
-          name: build-artifacts
+          name: build-artifact
           path: target/
 
       - name: Run WEB tests
