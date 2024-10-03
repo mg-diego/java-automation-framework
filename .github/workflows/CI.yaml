@@ -18,11 +18,14 @@ jobs:
             java-version: '17'
             distribution: 'temurin'
         - name: Build solution
+          shell: cmd
           run: mvn clean package -DskipTests -Dstyle.color=always
         - name: Run Selenoid
           shell: pwsh
           run: .\src\external-resources\selenoid\start-selenoid-docker.ps1
         - name: Run WEB tests
+          shell: cmd
           run: mvn test -DsuiteXmlFile=TestNG.xml -Dstyle.color=always -Dcucumber.filter.tags="@WEB"
         - name: Run API tests
+          shell: cmd
           run: mvn test -DsuiteXmlFile=TestNG.xml -Dstyle.color=always -Dcucumber.filter.tags="@API"
